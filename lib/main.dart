@@ -117,23 +117,28 @@ class _MyHomePageState extends State<MyHomePage> {
           ),
         ),
         floatingActionButton: Row(
-          mainAxisAlignment: MainAxisAlignment.spaceEvenly,
           children: <Widget>[
-            FloatingActionButton(
-              onPressed: _incrementCounter,
-              tooltip: 'Increment',
-              child: const Icon(Icons.add),
-            ),
-            FloatingActionButton(
-              onPressed: _decrementCounter,
-              tooltip: 'Decrement',
-              child: const Icon(Icons.add),
-            ),
-            FloatingActionButton(
-              onPressed: _refreshCounter,
-              tooltip: 'Refresh',
-              child: const Icon(Icons.add),
-            ),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(27, 0, 80, 0),
+                child: FloatingActionButton(
+                  onPressed: _incrementCounter,
+                  tooltip: 'Increment',
+                  child: const Icon(Icons.add),
+                )),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 80, 0),
+                child: FloatingActionButton(
+                  onPressed: _decrementCounter,
+                  tooltip: 'Decrement',
+                  child: const Icon(Icons.remove),
+                )),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(0, 0, 0, 0),
+                child: FloatingActionButton(
+                  onPressed: _refreshCounter,
+                  tooltip: 'Refresh',
+                  child: const Icon(Icons.refresh),
+                )),
           ],
         )
 
