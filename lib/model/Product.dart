@@ -9,42 +9,42 @@ class Product {
 List<Product> loadProducts = [
   Product(
       imageUrl:
-          'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fe%2Fee%2FChain_link_icon.png&tbnid=mj2OmSHS0LnkzM&vet=12ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0..i&imgrefurl=https%3A%2F%2Fsimple.m.wikipedia.org%2Fwiki%2FFile%3AChain_link_icon.png&docid=vaqxamEs3kiypM&w=950&h=400&q=image%20link&ved=2ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0',
+          'https://th.bing.com/th/id/OIP.lVFTwoji-O074sn8YWKrZQHaHa?rs=1&pid=ImgDetMain',
       title: 'title',
-      price: 'price'),
+      price: '20.09'),
   Product(
       imageUrl:
-          'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fe%2Fee%2FChain_link_icon.png&tbnid=mj2OmSHS0LnkzM&vet=12ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0..i&imgrefurl=https%3A%2F%2Fsimple.m.wikipedia.org%2Fwiki%2FFile%3AChain_link_icon.png&docid=vaqxamEs3kiypM&w=950&h=400&q=image%20link&ved=2ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0',
+          'https://th.bing.com/th?id=OIP.PZ_PgafjDwukHtimVXf5jgHaJQ&w=223&h=279&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2',
       title: 'title',
-      price: 'price'),
+      price: '30.01'),
   Product(
       imageUrl:
-          'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fe%2Fee%2FChain_link_icon.png&tbnid=mj2OmSHS0LnkzM&vet=12ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0..i&imgrefurl=https%3A%2F%2Fsimple.m.wikipedia.org%2Fwiki%2FFile%3AChain_link_icon.png&docid=vaqxamEs3kiypM&w=950&h=400&q=image%20link&ved=2ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0',
+          'https://th.bing.com/th?id=OIP.PZ_PgafjDwukHtimVXf5jgHaJQ&w=223&h=279&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2',
       title: 'title',
-      price: 'price'),
+      price: '30.01'),
   Product(
       imageUrl:
-          'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fe%2Fee%2FChain_link_icon.png&tbnid=mj2OmSHS0LnkzM&vet=12ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0..i&imgrefurl=https%3A%2F%2Fsimple.m.wikipedia.org%2Fwiki%2FFile%3AChain_link_icon.png&docid=vaqxamEs3kiypM&w=950&h=400&q=image%20link&ved=2ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0',
+          'https://th.bing.com/th?id=OIP.PZ_PgafjDwukHtimVXf5jgHaJQ&w=223&h=279&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2',
       title: 'title',
-      price: 'price'),
+      price: '30.20'),
   Product(
       imageUrl:
-          'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fe%2Fee%2FChain_link_icon.png&tbnid=mj2OmSHS0LnkzM&vet=12ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0..i&imgrefurl=https%3A%2F%2Fsimple.m.wikipedia.org%2Fwiki%2FFile%3AChain_link_icon.png&docid=vaqxamEs3kiypM&w=950&h=400&q=image%20link&ved=2ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0',
+          'https://th.bing.com/th?id=OIP.PZ_PgafjDwukHtimVXf5jgHaJQ&w=223&h=279&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2',
       title: 'title',
-      price: 'price'),
+      price: '30.01'),
   Product(
       imageUrl:
-          'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fe%2Fee%2FChain_link_icon.png&tbnid=mj2OmSHS0LnkzM&vet=12ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0..i&imgrefurl=https%3A%2F%2Fsimple.m.wikipedia.org%2Fwiki%2FFile%3AChain_link_icon.png&docid=vaqxamEs3kiypM&w=950&h=400&q=image%20link&ved=2ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0',
+          'https://th.bing.com/th?id=OIP.PZ_PgafjDwukHtimVXf5jgHaJQ&w=223&h=279&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2',
       title: 'title',
-      price: 'price'),
+      price: '30.01'),
   Product(
       imageUrl:
-          'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fe%2Fee%2FChain_link_icon.png&tbnid=mj2OmSHS0LnkzM&vet=12ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0..i&imgrefurl=https%3A%2F%2Fsimple.m.wikipedia.org%2Fwiki%2FFile%3AChain_link_icon.png&docid=vaqxamEs3kiypM&w=950&h=400&q=image%20link&ved=2ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0',
+          'https://th.bing.com/th?id=OIP.PZ_PgafjDwukHtimVXf5jgHaJQ&w=223&h=279&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2',
       title: 'title',
-      price: 'price'),
+      price: '30.01'),
   Product(
       imageUrl:
-          'https://www.google.com/imgres?imgurl=https%3A%2F%2Fupload.wikimedia.org%2Fwikipedia%2Fcommons%2Fe%2Fee%2FChain_link_icon.png&tbnid=mj2OmSHS0LnkzM&vet=12ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0..i&imgrefurl=https%3A%2F%2Fsimple.m.wikipedia.org%2Fwiki%2FFile%3AChain_link_icon.png&docid=vaqxamEs3kiypM&w=950&h=400&q=image%20link&ved=2ahUKEwiY2cS5pLKEAxWnY6QEHdP6AF8QMygAegQIARB0',
+          'https://th.bing.com/th?id=OIP.PZ_PgafjDwukHtimVXf5jgHaJQ&w=223&h=279&c=8&rs=1&qlt=90&o=6&dpr=1.5&pid=3.1&rm=2',
       title: 'title',
-      price: 'price'),
+      price: '30.01'),
 ];
