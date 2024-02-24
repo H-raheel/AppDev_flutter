@@ -34,14 +34,14 @@ class NextPage extends StatefulWidget {
 }
 
 class _NextPageState extends State<NextPage> {
-  List<Card> buildGridCards(BuildContext context) {
+  List<Card> _buildGridCards(BuildContext context) {
     List<Product> products = loadProducts;
+    print(products);
     if (products.isEmpty) {
       return const <Card>[];
     }
+
     final ThemeData theme = Theme.of(context);
-    final NumberFormat formatter = NumberFormat.simpleCurrency(
-        locale: Localizations.localeOf(context).toString());
 
     return products.map((product) {
       return Card(
@@ -50,10 +50,8 @@ class _NextPageState extends State<NextPage> {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             AspectRatio(
-              aspectRatio: 18 / 11,
-              child: Image.network(
-                product.imageUrl,
-              ),
+              aspectRatio: 18.0 / 11.0,
+              child: Image.network(product.imageUrl),
             ),
             Expanded(
               child: Padding(
@@ -68,7 +66,7 @@ class _NextPageState extends State<NextPage> {
                     ),
                     const SizedBox(height: 8.0),
                     Text(
-                      formatter.format(product.price),
+                      product.price,
                       style: theme.textTheme.titleSmall,
                     ),
                   ],
@@ -120,7 +118,7 @@ class _NextPageState extends State<NextPage> {
         crossAxisCount: 2,
         padding: const EdgeInsets.all(16.0),
         childAspectRatio: 8.0 / 9.0,
-        children: buildGridCards(context),
+        children: _buildGridCards(context),
       ),
     );
   }
