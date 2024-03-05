@@ -1,179 +1,255 @@
 import 'package:flutter/material.dart';
-import 'model/Product.dart';
-import 'package:intl/intl.dart';
+import 'package:flutter_application_1/model/products.dart';
+
+import 'package:http/http.dart' as http;
+import 'dart:convert';
 
 void main() {
   runApp(const MyApp());
 }
 
-class MyApp extends StatefulWidget {
+class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
-  @override
-  State<MyApp> createState() => _MyAppState();
-}
-
-class _MyAppState extends State<MyApp> {
+  // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-        debugShowCheckedModeBanner: false,
-        title: 'Flutter Demo',
-        theme: ThemeData(
-          colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
-          useMaterial3: true,
-        ),
-        home: Login());
-  }
-}
-
-class NextPage extends StatefulWidget {
-  @override
-  const NextPage({super.key});
-  State<NextPage> createState() => _NextPageState();
-}
-
-class _NextPageState extends State<NextPage> {
-  List<Card> _buildGridCards(BuildContext context) {
-    List<Product> products = loadProducts;
-    print(products);
-    if (products.isEmpty) {
-      return const <Card>[];
-    }
-
-    final ThemeData theme = Theme.of(context);
-
-    return products.map((product) {
-      return Card(
-        clipBehavior: Clip.antiAlias,
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            AspectRatio(
-              aspectRatio: 18.0 / 11.0,
-              child: Image.network(product.imageUrl),
-            ),
-            Expanded(
-              child: Padding(
-                padding: const EdgeInsets.fromLTRB(16.0, 12.0, 16.0, 8.0),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      product.title,
-                      style: theme.textTheme.titleLarge,
-                      maxLines: 1,
-                    ),
-                    const SizedBox(height: 8.0),
-                    Text(
-                      product.price,
-                      style: theme.textTheme.titleSmall,
-                    ),
-                  ],
-                ),
-              ),
-            ),
-          ],
-        ),
-      );
-    }).toList();
-  }
-
-  @override
-  Widget build(BuildContext context) {
-    return Scaffold(
-      appBar: AppBar(
-        leading: IconButton(
-          icon: const Icon(
-            Icons.menu,
-            semanticLabel: 'menu',
-          ),
-          onPressed: () {
-            print('Menu button');
-          },
-        ),
-        title: const Text('SHRINE'),
-        actions: <Widget>[
-          IconButton(
-            icon: const Icon(
-              Icons.search,
-              semanticLabel: 'search',
-            ),
-            onPressed: () {
-              print('Search button');
-            },
-          ),
-          IconButton(
-            icon: const Icon(
-              Icons.tune,
-              semanticLabel: 'filter',
-            ),
-            onPressed: () {
-              print('Filter button');
-            },
-          ),
-        ],
+      title: 'Flutter Demo',
+      theme: ThemeData(
+        colorScheme:
+            ColorScheme.fromSeed(seedColor: Color.fromARGB(255, 140, 184, 175)),
+        useMaterial3: true,
       ),
-      body: GridView.count(
-        crossAxisCount: 2,
-        padding: const EdgeInsets.all(16.0),
-        childAspectRatio: 8.0 / 9.0,
-        children: _buildGridCards(context),
-      ),
+      home: const UsersScreen(title: 'Flutter Demo Home Page'),
     );
   }
 }
 
-class Login extends StatelessWidget {
-  final _usernameController = TextEditingController();
-  final _passwordController = TextEditingController();
+class UsersScreen extends StatefulWidget {
+  const UsersScreen({super.key, required this.title});
+
+  final String title;
+
+  @override
+  State<UsersScreen> createState() => _UsersScreenState();
+}
+
+class _UsersScreenState extends State<UsersScreen> {
+  late Future<List<Products>> futureUsersList;
+
+  Future<List<Products>> fetchUsers() async {
+    Uri uriObject = Uri.parse('https://dummyjson.com/products');
+    final response = await http.get(uriObject);
+    if (response.statusCode == 200) {
+      // print(jsonDecode(response.body)["products"]);
+      List<dynamic> parsedListJson = jsonDecode(response.body)["products"];
+      // print("heree");
+      print(parsedListJson);
+      List<Products> itemsList = List<Products>.from(
+        parsedListJson.map<Products>(
+          (dynamic user) => Products.fromJson(user),
+        ),
+      );
+      return itemsList;
+    } else {
+      throw Exception('Failed to load Album');
+    }
+  }
+
+  @override
+  void initState() {
+    // TODO: implement initState
+    super.initState();
+
+    futureUsersList = fetchUsers();
+  }
+
   @override
   Widget build(BuildContext context) {
-    // TODO: implement build
     return Scaffold(
-        body: Padding(
-            padding: EdgeInsets.symmetric(horizontal: 20),
-            child: SingleChildScrollView(
-                child: Column(children: [
-              const SizedBox(height: 200),
-              const Text('SHRINE'),
-              const SizedBox(height: 150),
-              TextField(
-                controller: _usernameController,
-                decoration: const InputDecoration(
-                  filled: true,
-                  labelText: 'Username',
-                ),
-              ),
-              const SizedBox(height: 12),
-              TextField(
-                controller: _passwordController,
-                decoration: const InputDecoration(
-                  filled: true,
-                  labelText: 'Password',
-                ),
-                obscureText: true,
-              ),
-              const SizedBox(height: 12),
-              OverflowBar(
-                alignment: MainAxisAlignment.end,
-                children: <Widget>[
-                  TextButton(
-                    child: Text('CANCEL'),
-                    onPressed: () {
-                      _usernameController.clear();
-                      _passwordController.clear();
-                    },
-                  ),
-                  ElevatedButton(
-                    child: Text('NEXT'),
-                    onPressed: () => Navigator.push(
-                      context,
-                      MaterialPageRoute(builder: (context) => NextPage()),
-                    ),
-                  ),
-                ],
-              )
-            ]))));
+        appBar: AppBar(
+          // backgroundColor: Theme.of(context).colorScheme.inversePrimary,
+          title: Text('Products'),
+          centerTitle: true,
+        ),
+        body: SafeArea(
+            child: FutureBuilder(
+          future: futureUsersList,
+          builder: (context, snapshot) {
+            if (snapshot.hasData) {
+              return ListView.builder(
+                  itemCount: snapshot.data?.length,
+                  itemBuilder: (context, index) {
+                    var user = snapshot.data![index];
+                    return AspectRatio(
+                      aspectRatio: 4 / 2.5,
+                      // padding: const EdgeInsets.symmetric(vertical: 10),
+                      child: Padding(
+                          padding: EdgeInsets.fromLTRB(4, 10, 4, 10),
+                          child: Card(
+
+                              //     child: ListTile(
+                              //   // leading: CircleAvatar(child: Image.network("hh")),
+                              //   title: Text(index.toString()),
+                              //   subtitle: Text(user.title),
+                              //   trailing: Icon(Icons.visibility),
+                              //   onTap: () {
+                              //     showModalBottomSheet(
+                              //         context: context,
+                              //         builder: (context) {
+                              //           return Container(
+                              //               height: MediaQuery.of(context).size.width,
+                              //               width: MediaQuery.of(context).size.width,
+                              //               child: Center(
+                              //                 child: Text(user.title),
+                              //               ));
+                              //         });
+                              //   },
+                              // )
+                              clipBehavior: Clip.antiAlias,
+                              elevation: 3,
+                              shape: const RoundedRectangleBorder(
+                                  borderRadius:
+                                      BorderRadius.all(Radius.circular(20))),
+                              // child: SizedBox(
+                              // height: 260,
+                              // width: 600,
+                              child: Column(
+                                // mainAxisAlignment:
+                                //     MainAxisAlignment.spaceBetween,
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: <Widget>[
+                                  // AspectRatio(
+                                  //   aspectRatio: 18.0 / 11.0,
+                                  //   child: Image.network(user.thumbnail),
+                                  // ),
+                                  AspectRatio(
+                                    aspectRatio: 4 / 1,
+                                    child: Image.network(user.thumbnail!,
+                                        // height: 100,
+                                        // width: 600,
+                                        fit: BoxFit.cover),
+                                  ),
+                                  //  SizedBox(height: 20),
+                                  Padding(
+                                      padding: EdgeInsets.fromLTRB(5, 0, 5, 0),
+                                      child: Row(
+                                        children: [
+                                          Text(
+                                            user.title.length > 20
+                                                ? user.title.substring(0, 20)
+                                                : user.title,
+                                            maxLines: 1,
+                                            style: const TextStyle(
+                                                fontWeight: FontWeight.bold,
+                                                fontSize: 18),
+                                          ),
+                                          const Spacer(),
+                                          Row(children: [
+                                            Text(
+                                              user.price.toString() + "USD",
+                                              maxLines: 1,
+                                              style: const TextStyle(
+                                                  fontWeight: FontWeight.bold,
+                                                  fontSize: 18),
+                                            ),
+                                            const SizedBox(width: 10),
+                                            IconButton(
+                                                onPressed: () {
+                                                  showModalBottomSheet(
+                                                      context: context,
+                                                      builder: (context) {
+                                                        return Container(
+                                                            height: 0.5 *
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .height,
+                                                            width:
+                                                                MediaQuery.of(
+                                                                        context)
+                                                                    .size
+                                                                    .width,
+                                                            child: Column(
+                                                              crossAxisAlignment:
+                                                                  CrossAxisAlignment
+                                                                      .start,
+                                                              children: <Widget>[
+                                                                SizedBox(
+                                                                    height: 20),
+                                                                SingleChildScrollView(
+                                                                    scrollDirection:
+                                                                        Axis.horizontal,
+                                                                    child: Row(
+                                                                      mainAxisAlignment:
+                                                                          MainAxisAlignment
+                                                                              .spaceEvenly,
+                                                                      children: user
+                                                                          .images
+                                                                          .map((item) =>
+                                                                              buildItemWidget(item))
+                                                                          .toList(),
+                                                                    )),
+                                                                Text(
+                                                                  user.title,
+                                                                  maxLines: 1,
+                                                                  style: const TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          18),
+                                                                ),
+                                                                Text(user
+                                                                    .description!),
+                                                                Text(
+                                                                  "\$" +
+                                                                      user.price
+                                                                          .toString(),
+                                                                  maxLines: 1,
+                                                                  style: const TextStyle(
+                                                                      fontWeight:
+                                                                          FontWeight
+                                                                              .bold,
+                                                                      fontSize:
+                                                                          18),
+                                                                ),
+                                                              ],
+                                                            ));
+                                                      });
+                                                },
+                                                icon: Icon(
+                                                    Icons.remove_red_eye_sharp))
+                                          ])
+                                        ],
+                                      )),
+                                  //  const Spacer(),
+
+                                  Text(
+                                    user.description!,
+                                    overflow: TextOverflow.ellipsis,
+                                    maxLines: 2,
+                                  ),
+                                ],
+                              ))),
+                    );
+                  });
+            } else if (snapshot.hasError) {
+              return Text(snapshot.error.toString());
+            }
+            return const CircularProgressIndicator();
+          },
+        ) // This trailing comma makes auto-formatting nicer for build methods.
+            ));
+  }
+
+  Widget buildItemWidget(String item) {
+    print(item);
+    return Image.network(
+      item,
+      height: 120,
+      width: 130,
+    );
   }
 }
